@@ -1,14 +1,12 @@
 package com.java.common.functional.impl;
 
-import com.java.common.functional.Try;
-
 import lombok.Getter;
 
 /**
  * An implementation of Try representing a success.
  * @param <E>
  */
-public final class Success<E> extends Try<E> {
+public final class Success<E> extends TryImpl<E> {
 
     @Getter private final E result;
 
@@ -21,15 +19,15 @@ public final class Success<E> extends Try<E> {
     }
     
     public boolean isTryResult() {
-    	return this.result instanceof Try;
+    	return this.result instanceof TryImpl;
     }
 
     /**
      * @inheritDoc
      */
     @Override
-    public Type getType() {
-        return Type.SUCCESS;
+    public TryType getType() {
+        return TryType.SUCCESS;
     }
 
     @Override

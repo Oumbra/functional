@@ -1,7 +1,7 @@
 package com.java.common.functional.lambda;
 
 @FunctionalInterface
-public interface ThrowRunnable {
+public interface RunnableThrowable {
 
 	default void run() {
 		try {

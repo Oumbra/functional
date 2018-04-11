@@ -1,14 +1,12 @@
 package com.java.common.functional.impl;
 
-import com.java.common.functional.Try;
-
 import lombok.Getter;
 
 /**
  * An implementation of Try representing a failure.
  * @param <E>
  */
-public final class Failure<E> extends Try<E> {
+public final class Failure<E> extends TryImpl<E> {
 
     @Getter private final Exception exception;
 
@@ -25,8 +23,8 @@ public final class Failure<E> extends Try<E> {
      * @inheritDoc
      */
     @Override
-    public Type getType() {
-        return Type.FAILURE;
+    public TryType getType() {
+        return TryType.FAILURE;
     }
 
     @Override

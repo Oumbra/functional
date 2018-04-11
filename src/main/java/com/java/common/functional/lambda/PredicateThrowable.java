@@ -3,7 +3,7 @@ package com.java.common.functional.lambda;
 import java.util.function.Predicate;
 
 @FunctionalInterface
-public interface ThrowPredicate<T> extends Predicate<T> {
+public interface PredicateThrowable<T> extends Predicate<T> {
 	
 	@Override
 	default boolean test(T t) {

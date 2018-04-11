@@ -1,13 +1,14 @@
 package com.java.common.functional.lambda;
 
-import java.util.function.BiFunction;
+import java.util.function.Consumer;
 
 @FunctionalInterface
-public interface ThrowBiFunction<T,U,R> extends BiFunction<T, U, R> {
+public interface ConsumerThrowable<T> extends Consumer<T>{
+
 	@Override
-	default R apply(T t, U u) {
+	default void accept(T t) {
 		try {
-			return applyThrows(t, u);
+			acceptTrows(t);
 		} catch (Exception e) {
 			RuntimeException re = new RuntimeException(e.getMessage());
 			re.initCause(e);
@@ -15,5 +16,5 @@ public interface ThrowBiFunction<T,U,R> extends BiFunction<T, U, R> {
 		}
 	}
 	
-    R applyThrows(T t, U u) throws Exception;
+	void acceptTrows(T t) throws Exception;
 }

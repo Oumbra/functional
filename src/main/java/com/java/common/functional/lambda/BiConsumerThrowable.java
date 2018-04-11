@@ -1,14 +1,14 @@
 package com.java.common.functional.lambda;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 @FunctionalInterface
-public interface ThrowConsumer<T> extends Consumer<T>{
+public interface BiConsumerThrowable<T,U> extends BiConsumer<T,U> {
 
 	@Override
-	default void accept(T t) {
+	default void accept(T t, U u) {
 		try {
-			acceptTrows(t);
+			acceptTrows(t,u);
 		} catch (Exception e) {
 			RuntimeException re = new RuntimeException(e.getMessage());
 			re.initCause(e);
@@ -16,5 +16,5 @@ public interface ThrowConsumer<T> extends Consumer<T>{
 		}
 	}
 	
-	void acceptTrows(T t) throws Exception;
+	void acceptTrows(T t, U u) throws Exception;
 }

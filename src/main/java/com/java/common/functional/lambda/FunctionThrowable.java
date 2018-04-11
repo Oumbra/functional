@@ -3,7 +3,7 @@ package com.java.common.functional.lambda;
 import java.util.function.Function;
 
 @FunctionalInterface
-public interface ThrowFunction<T,R> extends Function<T, R> {
+public interface FunctionThrowable<T,R> extends Function<T, R> {
 
     @Override
     default R apply(final T t){

@@ -56,7 +56,7 @@ public class FunctionalList<E> extends ArrayList<E> implements CastableList<E> {
     }
 
     public E next() {
-        if (!hasNext()) throw new NoSuchElementException();
+        if (!hasNext()) throw new NoSuchElementException("No other element!");
         return get(internalIndex++);
     }
 
@@ -67,7 +67,7 @@ public class FunctionalList<E> extends ArrayList<E> implements CastableList<E> {
 
     @Override
     public E previous() {
-        if (!hasPrevious()) throw new NoSuchElementException();
+        if (!hasPrevious()) throw new NoSuchElementException("No previous element!");
         return get(--internalIndex);
     }
 
@@ -95,7 +95,6 @@ public class FunctionalList<E> extends ArrayList<E> implements CastableList<E> {
     public E last() {
         return get(size() - 1);
     }
-
 
     public static <T> FunctionalList<T> convert(List<T> list) {
         return new FunctionalList<T>().addAllChain(list);
