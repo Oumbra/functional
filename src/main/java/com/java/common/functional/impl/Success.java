@@ -1,5 +1,7 @@
 package com.java.common.functional.impl;
 
+import com.java.common.functional.enums.TryType;
+
 import lombok.Getter;
 
 /**
