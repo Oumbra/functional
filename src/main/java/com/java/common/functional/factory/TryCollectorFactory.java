@@ -1,16 +1,16 @@
 package com.java.common.functional.factory;
 
-import com.java.common.functional.Try;
-import com.java.common.functional.collector.TryCollector;
-import com.java.common.functional.enums.TryType;
-import com.java.common.structure.FunctionalList;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import com.java.common.functional.Try;
+import com.java.common.functional.collector.TryCollector;
+import com.java.common.functional.enums.TryType;
+import com.java.common.structure.FunctionalList;
 
 public class TryCollectorFactory {
 
@@ -22,16 +22,6 @@ public class TryCollectorFactory {
     public static <E> Collector<Supplier<Try<E>>, Map<TryType, LinkedList<Try<E>>>, Try<List<E>>> collect() {
         return new TryCollector<>();
     }
-
-    /**
-     * Permet d'effectuer une reduction afin de récupérer la première erreur potentiellement apparue
-     * @param <E> Type de l'objet Try
-     * @return
-     */
-    public static <E> Collector<Try<E>, ?, Try<E>> reduce() {
-        return Collectors.reducing(TryFactory.empty(), (previous, current) -> previous.isFailure()? previous: current);
-    }
-
 
     /**
      * Permet d'effectuer une reduction afin de récupérer la première erreur potentiellement apparue
@@ -88,4 +78,28 @@ public class TryCollectorFactory {
         return Collectors.groupingBy(t -> t.getType());
     }
 
+    /**
+     * Permet d'effectuer une reduction afin de récupérer la première erreur potentiellement apparue
+     * @param <E> Type de l'objet Try
+     * @return
+     */
+    public static <E> Collector<Try<E>, ?, Try<E>> reduce() {
+        return Collectors.reducing(TryFactory.empty(), (previous, current) -> previous.isFailure()? previous: current);
+    }
+    
+    /**
+     * Permet d'effectuer une reduction afin de ne récupèrer uniquement les résultats des fonctions n'ayant eu aucune erreur
+     * @return
+     */
+    public static <E> Collector<Try<E>, ?, FunctionalList<E>> successOnly() {
+    	return Collector.of(
+			() -> new FunctionalList<E>(),
+			(acc, tryValue) -> {
+				if (tryValue.isSuccess()) 
+					acc.add(tryValue.asSuccess().getResult());
+			},
+			(left, right) -> left.addAllChain(right)
+		);
+    }
+    
 }

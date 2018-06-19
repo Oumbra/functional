@@ -19,6 +19,8 @@
         <jdk.source.version>1.8</jdk.source.version>
         <compiler.encoding>UTF-8</compiler.encoding>
         <resources.encoding>UTF-8</resources.encoding>
+	    <maven.compiler.source>1.8</maven.compiler.source>
+	    <maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	
 	<dependencies>
